@@ -477,6 +477,12 @@
         justify-content: center;
         color: #5da697;
         gap: 10px;
+        cursor: pointer; /* تم اضافة المؤشر ليظهر قابلية الضغط */
+        transition: 0.3s;
+      }
+
+      .camera-placeholder:hover {
+        background: #e8e8e8;
       }
 
       .camera-placeholder i {
@@ -1302,7 +1308,7 @@
             ></video>
             <div class="camera-placeholder" id="cameraPlaceholder">
               <i class="fas fa-video"></i>
-              <p>اضغط على ايقونة مترجم 1 لتشغيل الكاميرا</p>
+              <p>اضغط هنا لتشغيل الكاميرا</p>
             </div>
           </div>
 
@@ -1496,12 +1502,9 @@
 
         document.getElementById("notificationsBadge").textContent = "3";
 
+        // تم إلغاء تشغيل الكاميرا التلقائي عند الضغط على مترجم 1
         const mode1 = document.getElementById("modeSignLanguage");
-        mode1.addEventListener("click", function () {
-          if (!isCameraOn) {
-            startCamera();
-          }
-        });
+        mode1.addEventListener("click", switchToMode1);
       });
 
       // دالة API عامة
@@ -1688,6 +1691,11 @@
         document
           .getElementById("capturePhoto")
           .addEventListener("click", capturePhoto);
+
+        // تفعيل الضغط على الأيقونة الكبيرة لتشغيل الكاميرا
+        document
+          .getElementById("cameraPlaceholder")
+          .addEventListener("click", startCamera);
 
         document
           .getElementById("speakBtn")
