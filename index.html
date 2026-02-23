@@ -1,0 +1,2129 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>نتواصل - بلغة الإشارة</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Scheherazade+New:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* جميع الأنماط مع خلفية بيضاء ثابتة */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Amiri", "Scheherazade New", "Poppins", sans-serif;
+      }
+
+      body {
+        background: #ffffff;
+        color: #333333;
+        min-height: 100vh;
+        position: relative;
+        overflow-x: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* هيدر أصغر */
+      .header {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(15px);
+        padding: 10px 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 2px solid #8e7ab5;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 5px 20px rgba(142, 122, 181, 0.15);
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .logo-icon {
+        width: 40px;
+        height: 40px;
+        background: linear-gradient(135deg, #8e7ab5, #4b76a8);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-size: 20px;
+        border: 2px solid #98c9a3;
+        box-shadow: 0 5px 15px rgba(142, 122, 181, 0.3);
+        animation: logoFloat 3s ease-in-out infinite;
+      }
+      @keyframes logoFloat {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-3px);
+        }
+      }
+      .logo-text h2 {
+        font-size: 20px;
+        font-weight: 800;
+        font-family: "Amiri", "Scheherazade New", serif;
+        background: linear-gradient(135deg, #4b76a8, #8e7ab5);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        letter-spacing: 0.5px;
+      }
+      .logo-text p {
+        font-size: 12px;
+        color: #5da697;
+        font-family: "Amiri", serif;
+        font-weight: 600;
+      }
+
+      .header-actions {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        position: relative;
+      }
+
+      .header-btn {
+        width: 40px;
+        height: 40px;
+        background: #f5f5f5;
+        border: 2px solid #8e7ab5;
+        border-radius: 12px;
+        color: #4b76a8;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        position: relative;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(142, 122, 181, 0.15);
+        transition: all 0.3s ease;
+      }
+      .header-btn:hover {
+        transform: scale(1.05) rotate(3deg);
+        box-shadow: 0 6px 20px rgba(142, 122, 181, 0.25);
+        border-color: #5da697;
+        background: #8e7ab5;
+        color: #fff;
+      }
+
+      .badge {
+        position: absolute;
+        top: -5px;
+        left: -5px;
+        background: #ff6b6b;
+        color: white;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        font-size: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid #fff;
+        box-shadow: 0 2px 8px rgba(255, 107, 107, 0.5);
+        animation: badgePulse 1.5s ease-in-out infinite;
+      }
+
+      @keyframes badgePulse {
+        0% {
+          transform: scale(1);
+          background: #ff6b6b;
+        }
+        50% {
+          transform: scale(1.15);
+          background: #ff4444;
+        }
+        100% {
+          transform: scale(1);
+          background: #ff6b6b;
+        }
+      }
+
+      /* قائمة التنبيهات */
+      .notifications-dropdown {
+        position: absolute;
+        top: 50px;
+        left: 0;
+        width: 320px;
+        background: #ffffff;
+        backdrop-filter: blur(20px);
+        border: 2px solid #8e7ab5;
+        border-radius: 20px;
+        padding: 12px;
+        box-shadow: 0 15px 30px rgba(142, 122, 181, 0.25);
+        z-index: 1000;
+        display: none;
+        border-left: 4px solid #5da697;
+      }
+
+      .notifications-dropdown.show {
+        display: block;
+        animation: dropdownFade 0.4s ease;
+      }
+
+      @keyframes dropdownFade {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .notifications-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+        padding-bottom: 8px;
+        border-bottom: 2px solid #e0e0e0;
+      }
+
+      .notifications-header h3 {
+        color: #4b76a8;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-family: "Amiri", serif;
+      }
+
+      .notifications-header span {
+        color: #5da697;
+        font-size: 11px;
+        cursor: pointer;
+        padding: 3px 10px;
+        border-radius: 20px;
+        background: #f0f0f0;
+        border: 1px solid #8e7ab5;
+        transition: 0.3s;
+        font-family: "Amiri", serif;
+      }
+
+      .notification-item {
+        display: flex;
+        gap: 10px;
+        padding: 10px;
+        border-radius: 12px;
+        margin-bottom: 6px;
+        background: #f8f8f8;
+        border: 2px solid #e0e0e0;
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+
+      .notification-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        background: linear-gradient(135deg, #8e7ab5, #4b76a8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-size: 18px;
+        box-shadow: 0 4px 12px rgba(142, 122, 181, 0.25);
+      }
+
+      .notification-content {
+        flex: 1;
+      }
+
+      .notification-title {
+        color: #4b76a8;
+        font-size: 13px;
+        font-weight: 700;
+        margin-bottom: 2px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        font-family: "Amiri", serif;
+      }
+
+      .notification-text {
+        color: #555;
+        font-size: 12px;
+        margin-bottom: 2px;
+        line-height: 1.3;
+        font-family: "Amiri", serif;
+      }
+
+      .notification-time {
+        color: #5da697;
+        font-size: 10px;
+        display: flex;
+        align-items: center;
+        gap: 3px;
+        font-family: "Amiri", serif;
+      }
+
+      .notification-badge-new {
+        background: #8e7ab5;
+        color: white;
+        padding: 2px 6px;
+        border-radius: 20px;
+        font-size: 9px;
+        font-weight: 600;
+        box-shadow: 0 0 10px rgba(142, 122, 181, 0.3);
+        font-family: "Amiri", serif;
+      }
+
+      .content {
+        padding: 15px;
+        position: relative;
+        z-index: 1;
+        max-width: 950px;
+        margin: 0 auto;
+        padding-bottom: 25px;
+        flex: 1;
+      }
+
+      .card {
+        background: #ffffff;
+        border-radius: 20px;
+        padding: 15px;
+        margin-bottom: 12px;
+        border: 2px solid #e0e0e0;
+        box-shadow: 0 8px 25px rgba(142, 122, 181, 0.08);
+        transition: 0.3s;
+      }
+      .card-title {
+        font-size: 16px;
+        font-weight: 700;
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        color: #4b76a8;
+        font-family: "Amiri", serif;
+      }
+
+      /* أنماط صفحة نتواصل */
+      .connect-header {
+        text-align: center;
+        margin-bottom: 25px;
+      }
+
+      .connect-header h1 {
+        font-size: 32px;
+        font-weight: 800;
+        font-family: "Amiri", "Scheherazade New", serif;
+        color: #4b76a8;
+        margin-bottom: 8px;
+        text-shadow: 2px 2px 8px rgba(142, 122, 181, 0.15);
+        letter-spacing: 1px;
+        line-height: 1.3;
+      }
+
+      .connect-header p {
+        color: #5da697;
+        font-size: 14px;
+        font-family: "Amiri", serif;
+        line-height: 1.5;
+      }
+
+      /* أيقونات المترجمين */
+      .mode-icons {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        margin: 25px 0;
+      }
+
+      .mode-icon-btn {
+        width: 140px;
+        height: 140px;
+        background: #ffffff;
+        border: 3px solid #e0e0e0;
+        border-radius: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 8px 25px rgba(142, 122, 181, 0.08);
+      }
+
+      .mode-icon-btn.active {
+        border-color: #8e7ab5;
+        background: #ffffff;
+        box-shadow: 0 10px 30px rgba(142, 122, 181, 0.2);
+        transform: translateY(-3px);
+      }
+
+      .mode-icon-btn i {
+        font-size: 50px;
+        position: relative;
+        z-index: 1;
+        transition: 0.3s;
+      }
+
+      .mode-icon-btn:first-child i {
+        color: #8e7ab5;
+      }
+
+      .mode-icon-btn:last-child i {
+        color: #4b76a8;
+      }
+
+      .mode-icon-btn span {
+        font-size: 16px;
+        font-weight: 600;
+        color: #333;
+        font-family: "Amiri", serif;
+        position: relative;
+        z-index: 1;
+      }
+
+      /* حاوية الكاميرا */
+      .camera-container {
+        background: #ffffff;
+        border-radius: 20px;
+        padding: 15px;
+        margin-bottom: 15px;
+        border: 2px solid #e0e0e0;
+        min-height: 350px;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 8px 25px rgba(142, 122, 181, 0.08);
+      }
+
+      .camera-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+      }
+
+      .camera-header h3 {
+        color: #4b76a8;
+        font-size: 16px;
+        font-family: "Amiri", serif;
+      }
+
+      .camera-controls {
+        display: flex;
+        gap: 8px;
+      }
+
+      .camera-btn {
+        width: 36px;
+        height: 36px;
+        border-radius: 8px;
+        background: #f5f5f5;
+        border: 2px solid #8e7ab5;
+        color: #4b76a8;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: 0.3s;
+        font-size: 16px;
+      }
+
+      .camera-btn:hover {
+        background: #8e7ab5;
+        color: #fff;
+        transform: scale(1.1);
+      }
+
+      .camera-feed {
+        width: 100%;
+        height: 250px;
+        background: #f0f0f0;
+        border-radius: 15px;
+        overflow: hidden;
+        border: 2px solid #8e7ab5;
+        margin-bottom: 12px;
+        position: relative;
+      }
+
+      #cameraVideo {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .camera-placeholder {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: #5da697;
+        gap: 10px;
+      }
+
+      .camera-placeholder i {
+        font-size: 50px;
+        color: #8e7ab5;
+      }
+
+      .camera-placeholder p {
+        font-family: "Amiri", serif;
+        font-size: 13px;
+      }
+
+      /* منطقة النص */
+      .input-area {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        background: #f8f8f8;
+        border: 2px solid #4b76a8;
+        border-radius: 15px;
+        padding: 10px;
+        margin-top: 12px;
+      }
+
+      .text-input-container {
+        flex: 1;
+      }
+
+      .text-input-container textarea {
+        width: 100%;
+        height: 90px;
+        background: #ffffff;
+        border: 2px solid #e0e0e0;
+        border-radius: 12px;
+        padding: 10px;
+        color: #333;
+        font-size: 14px;
+        line-height: 1.4;
+        resize: none;
+        transition: 0.3s;
+        font-family: "Amiri", serif;
+      }
+
+      .text-input-container textarea:focus {
+        border-color: #8e7ab5;
+        outline: none;
+        box-shadow: 0 0 15px rgba(142, 122, 181, 0.2);
+      }
+
+      .text-input-container textarea::placeholder {
+        font-size: 13px;
+        color: #aaa;
+        font-family: "Amiri", serif;
+      }
+
+      .action-buttons {
+        display: flex;
+        gap: 8px;
+      }
+
+      .action-btn {
+        width: 70px;
+        height: 70px;
+        border-radius: 12px;
+        background: #f5f5f5;
+        border: 2px solid #8e7ab5;
+        color: #4b76a8;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 3px;
+        cursor: pointer;
+        transition: 0.3s;
+        font-size: 11px;
+        font-family: "Amiri", serif;
+      }
+
+      .action-btn i {
+        font-size: 26px;
+      }
+
+      .action-btn:hover {
+        border-color: #5da697;
+        color: #5da697;
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(142, 122, 181, 0.2);
+      }
+
+      .action-btn.speak-btn {
+        background: linear-gradient(135deg, #8e7ab5, #4b76a8);
+        border-color: #5da697;
+        color: #fff;
+      }
+
+      /* ===== أنماط محسنة لأيقونة التسجيل في المترجم الثاني ===== */
+      .video-converter-container {
+        background: #ffffff;
+        border-radius: 20px;
+        padding: 15px;
+        margin-bottom: 15px;
+        border: 2px solid #e0e0e0;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        box-shadow: 0 8px 25px rgba(142, 122, 181, 0.08);
+      }
+
+      .converter-header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: #4b76a8;
+        font-size: 16px;
+        border-bottom: 2px solid #8e7ab5;
+        padding-bottom: 8px;
+        font-family: "Amiri", serif;
+      }
+
+      .converter-header i {
+        color: #8e7ab5;
+        font-size: 20px;
+      }
+
+      .converter-text-area textarea {
+        width: 100%;
+        height: 100px;
+        background: #f8f8f8;
+        border: 2px solid #e0e0e0;
+        border-radius: 15px;
+        padding: 10px;
+        color: #333;
+        font-size: 14px;
+        line-height: 1.4;
+        resize: none;
+        transition: 0.3s;
+        font-family: "Amiri", serif;
+      }
+
+      .converter-text-area textarea:focus {
+        border-color: #8e7ab5;
+        outline: none;
+        box-shadow: 0 0 15px rgba(142, 122, 181, 0.2);
+      }
+
+      /* أزرار التحكم - تصميم محسن لأيقونة التسجيل */
+      .converter-controls {
+        display: flex;
+        gap: 15px;
+        align-items: center;
+        background: linear-gradient(135deg, #f8f8f8, #f0f0f0);
+        border: 2px solid #8e7ab5;
+        border-radius: 50px;
+        padding: 12px 15px;
+        box-shadow: 0 5px 15px rgba(142, 122, 181, 0.1);
+      }
+
+      .record-control {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        flex: 1;
+      }
+
+      /* أيقونة التسجيل المحسنة بشكل كبير */
+      .premium-record-btn {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        background: linear-gradient(145deg, #8e7ab5, #6b5a8f);
+        border: 4px solid #ffffff;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        font-size: 30px;
+        box-shadow:
+          0 10px 25px rgba(142, 122, 181, 0.4),
+          0 0 0 2px #5da697 inset;
+        position: relative;
+        z-index: 5;
+      }
+
+      .premium-record-btn:hover {
+        transform: scale(1.1);
+        box-shadow:
+          0 15px 35px rgba(142, 122, 181, 0.5),
+          0 0 0 3px #98c9a3 inset;
+        background: linear-gradient(145deg, #9b87c5, #7b6aa8);
+      }
+
+      .premium-record-btn.recording {
+        background: linear-gradient(145deg, #ff6b6b, #ff4444);
+        border-color: #ffffff;
+        animation: premiumRecordPulse 1.5s ease infinite;
+        box-shadow:
+          0 10px 25px rgba(255, 68, 68, 0.4),
+          0 0 0 3px #ff8888 inset;
+      }
+
+      @keyframes premiumRecordPulse {
+        0% {
+          transform: scale(1);
+          box-shadow:
+            0 10px 25px rgba(255, 68, 68, 0.4),
+            0 0 0 3px #ff8888 inset;
+        }
+        50% {
+          transform: scale(1.15);
+          box-shadow:
+            0 20px 40px rgba(255, 68, 68, 0.6),
+            0 0 0 5px #ffaaaa inset;
+        }
+        100% {
+          transform: scale(1);
+          box-shadow:
+            0 10px 25px rgba(255, 68, 68, 0.4),
+            0 0 0 3px #ff8888 inset;
+        }
+      }
+
+      /* موجات صوتية متحركة حول أيقونة التسجيل */
+      .premium-record-btn::before {
+        content: "";
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        right: -10px;
+        bottom: -10px;
+        border-radius: 50%;
+        border: 2px solid rgba(142, 122, 181, 0.3);
+        animation: soundWave 2s ease-out infinite;
+        opacity: 0;
+        z-index: -1;
+      }
+
+      .premium-record-btn.recording::before {
+        border-color: rgba(255, 68, 68, 0.5);
+        animation: soundWaveRecording 1.5s ease-out infinite;
+      }
+
+      @keyframes soundWave {
+        0% {
+          transform: scale(1);
+          opacity: 0.5;
+        }
+        100% {
+          transform: scale(1.5);
+          opacity: 0;
+        }
+      }
+
+      @keyframes soundWaveRecording {
+        0% {
+          transform: scale(1);
+          opacity: 0.8;
+        }
+        100% {
+          transform: scale(1.8);
+          opacity: 0;
+        }
+      }
+
+      /* موجات صوتية إضافية */
+      .premium-record-btn::after {
+        content: "";
+        position: absolute;
+        top: -5px;
+        left: -5px;
+        right: -5px;
+        bottom: -5px;
+        border-radius: 50%;
+        border: 2px dashed rgba(93, 166, 151, 0.4);
+        animation: rotate 10s linear infinite;
+      }
+
+      .premium-record-btn.recording::after {
+        border-color: rgba(255, 255, 255, 0.6);
+        animation: rotate 5s linear infinite;
+      }
+
+      @keyframes rotate {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* مؤشر الحالة المحسن */
+      .record-status-premium {
+        color: #4b76a8;
+        font-size: 16px;
+        font-weight: 600;
+        padding: 8px 20px;
+        background: linear-gradient(135deg, #ffffff, #f5f5f5);
+        border: 2px solid #8e7ab5;
+        border-radius: 40px;
+        min-width: 150px;
+        text-align: center;
+        transition: 0.3s;
+        font-family: "Amiri", serif;
+        box-shadow: 0 3px 10px rgba(142, 122, 181, 0.1);
+        letter-spacing: 0.5px;
+      }
+
+      .record-status-premium.recording {
+        background: linear-gradient(135deg, #fff0f0, #ffe6e6);
+        border-color: #ff6b6b;
+        color: #ff4444;
+        box-shadow: 0 5px 15px rgba(255, 68, 68, 0.2);
+      }
+
+      /* تحسين شكل زر التحويل */
+      .convert-btn {
+        min-width: 160px;
+        height: 60px;
+        background: linear-gradient(135deg, #8e7ab5, #4b76a8);
+        border: 3px solid #ffffff;
+        border-radius: 40px;
+        color: #fff;
+        font-size: 16px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        cursor: pointer;
+        transition: 0.3s;
+        box-shadow: 0 8px 20px rgba(142, 122, 181, 0.3);
+        padding: 0 20px;
+        font-family: "Amiri", serif;
+        letter-spacing: 0.5px;
+      }
+
+      .convert-btn i {
+        font-size: 22px;
+      }
+
+      .convert-btn:hover {
+        transform: scale(1.05) translateY(-2px);
+        box-shadow: 0 12px 30px rgba(142, 122, 181, 0.4);
+        border-color: #98c9a3;
+      }
+
+      .convert-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+      }
+
+      /* معاينة الفيديو */
+      .video-preview-area {
+        width: 100%;
+        background: #f8f8f8;
+        border-radius: 15px;
+        padding: 12px;
+        border: 2px solid #8e7ab5;
+        margin-top: 10px;
+        animation: previewFade 0.5s ease;
+      }
+
+      .video-preview-area h4 {
+        color: #4b76a8;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-family: "Amiri", serif;
+        font-size: 15px;
+      }
+
+      .video-frame {
+        width: 100%;
+        border-radius: 12px;
+        overflow: hidden;
+        border: 3px solid #5da697;
+        background: #000;
+      }
+
+      .video-frame video {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      /* أنماط الملف الشخصي */
+      .modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(5px);
+        display: none;
+        z-index: 2000;
+        padding: 15px;
+        overflow-y: auto;
+        animation: modalFade 0.3s ease;
+      }
+
+      .modal.active {
+        display: block;
+      }
+
+      .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        padding-bottom: 12px;
+        border-bottom: 2px solid #8e7ab5;
+      }
+
+      .modal-header h3 {
+        color: #4b76a8;
+        font-size: 18px;
+        font-family: "Amiri", serif;
+      }
+
+      .modal-close {
+        background: #f0f0f0;
+        border: 2px solid #8e7ab5;
+        color: #4b76a8;
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 18px;
+        transition: 0.3s;
+      }
+
+      .modal-close:hover {
+        background: #8e7ab5;
+        color: #fff;
+        transform: rotate(180deg);
+      }
+
+      .simple-profile {
+        background: #ffffff;
+        border: 2px solid #8e7ab5;
+        border-radius: 20px;
+        padding: 20px;
+        max-width: 450px;
+        margin: 0 auto;
+        box-shadow: 0 15px 30px rgba(142, 122, 181, 0.15);
+      }
+
+      .profile-field {
+        margin-bottom: 15px;
+      }
+
+      .profile-field label {
+        display: block;
+        color: #4b76a8;
+        font-size: 14px;
+        margin-bottom: 4px;
+        font-family: "Amiri", serif;
+      }
+
+      .profile-field input {
+        width: 100%;
+        padding: 10px;
+        background: #f8f8f8;
+        border: 2px solid #e0e0e0;
+        border-radius: 8px;
+        color: #333;
+        font-size: 14px;
+        transition: 0.3s;
+        font-family: "Poppins", sans-serif;
+      }
+
+      .profile-field input:focus {
+        border-color: #8e7ab5;
+        outline: none;
+        box-shadow: 0 0 15px rgba(142, 122, 181, 0.2);
+      }
+
+      .whatsapp-link {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 10px;
+        background: #f0f8f5;
+        border: 2px solid #5da697;
+        border-radius: 8px;
+        margin: 12px 0;
+        color: #4b76a8;
+        text-decoration: none;
+        transition: 0.3s;
+        font-family: "Amiri", serif;
+        font-size: 14px;
+      }
+
+      .whatsapp-link:hover {
+        background: #e6f0ff;
+        border-color: #8e7ab5;
+        transform: translateX(-3px);
+      }
+
+      .whatsapp-link i {
+        font-size: 20px;
+        color: #25d366;
+      }
+
+      .whatsapp-link span {
+        flex: 1;
+        font-size: 14px;
+        direction: ltr;
+        text-align: left;
+        font-family: "Poppins", sans-serif;
+      }
+
+      .profile-actions {
+        display: flex;
+        gap: 12px;
+        margin-top: 20px;
+      }
+
+      .profile-btn {
+        flex: 1;
+        padding: 10px;
+        border-radius: 8px;
+        border: none;
+        font-weight: 700;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        cursor: pointer;
+        transition: 0.3s;
+        font-family: "Amiri", serif;
+      }
+
+      .profile-btn.save {
+        background: linear-gradient(135deg, #8e7ab5, #4b76a8);
+        color: #fff;
+        border: 2px solid #98c9a3;
+      }
+
+      .profile-btn.save:hover {
+        transform: scale(1.02);
+        box-shadow: 0 5px 20px rgba(142, 122, 181, 0.3);
+      }
+
+      .profile-btn.logout {
+        background: #f0f0f0;
+        border: 2px solid #8e7ab5;
+        color: #4b76a8;
+      }
+
+      .profile-btn.logout:hover {
+        background: #ffe6e6;
+        border-color: #ff6b6b;
+        color: #ff4444;
+      }
+
+      /* توقيع المطور */
+      .main-developer-credit {
+        text-align: center;
+        margin-top: 25px;
+        padding: 12px;
+        color: #5da697;
+        font-size: 13px;
+        border-top: 2px solid #8e7ab5;
+        background: #f8f8f8;
+        border-radius: 40px;
+        width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+        box-shadow: 0 6px 20px rgba(142, 122, 181, 0.08);
+        font-family: "Amiri", serif;
+      }
+
+      .main-developer-credit strong {
+        color: #8e7ab5;
+        font-weight: 800;
+        font-size: 14px;
+        font-family: "Poppins", sans-serif;
+      }
+
+      .developer-credit {
+        text-align: center;
+        margin-top: 12px;
+        padding: 10px;
+        color: #5da697;
+        font-size: 12px;
+        border-top: 1px solid #e0e0e0;
+        font-family: "Amiri", serif;
+      }
+
+      .toast {
+        position: fixed;
+        top: 70px;
+        left: 15px;
+        right: 15px;
+        background: linear-gradient(135deg, #8e7ab5, #4b76a8);
+        color: #fff;
+        padding: 10px 15px;
+        border-radius: 12px;
+        display: none;
+        align-items: center;
+        gap: 6px;
+        z-index: 5000;
+        font-weight: 600;
+        border: 2px solid #5da697;
+        box-shadow: 0 6px 25px rgba(142, 122, 181, 0.25);
+        animation: toastSlide 0.4s ease;
+        font-family: "Amiri", serif;
+        font-size: 14px;
+      }
+
+      .toast.show {
+        display: flex;
+      }
+
+      @keyframes toastSlide {
+        from {
+          transform: translateY(-150%);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      .loading-spinner {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        border-top-color: #fff;
+        animation: spin 1s ease-in-out infinite;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .mode-icons {
+          gap: 12px;
+        }
+        .mode-icon-btn {
+          width: 120px;
+          height: 120px;
+        }
+        .mode-icon-btn i {
+          font-size: 40px;
+        }
+        .mode-icon-btn span {
+          font-size: 14px;
+        }
+        .input-area {
+          flex-direction: column;
+        }
+        .action-buttons {
+          width: 100%;
+          justify-content: center;
+        }
+        .converter-controls {
+          flex-direction: column;
+        }
+        .connect-header h1 {
+          font-size: 28px;
+        }
+        .connect-header p {
+          font-size: 13px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- الهيدر -->
+    <header class="header">
+      <div class="logo">
+        <div class="logo-icon">
+          <i class="fas fa-hands"></i>
+        </div>
+        <div class="logo-text">
+          <h2>نتواصل</h2>
+          <p>بلغة الإشارة</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <!-- أيقونة التنبيهات -->
+        <div style="position: relative">
+          <button class="header-btn" id="notificationsBtn">
+            <i class="fas fa-bell"></i>
+            <span class="badge" id="notificationsBadge">3</span>
+          </button>
+
+          <!-- قائمة التنبيهات -->
+          <div class="notifications-dropdown" id="notificationsDropdown">
+            <div class="notifications-header">
+              <h3><i class="fas fa-bell"></i> التنبيهات</h3>
+              <span onclick="markAllAsRead()">تحديد الكل</span>
+            </div>
+
+            <div
+              class="notification-item new"
+              onclick="showToast('فتح المحادثة')"
+            >
+              <div class="notification-icon">
+                <i class="fas fa-hands"></i>
+              </div>
+              <div class="notification-content">
+                <div class="notification-title">
+                  مترجم اشارة 1
+                  <span class="notification-badge-new">جديد</span>
+                </div>
+                <div class="notification-text">قام بارسال رسالة لك</div>
+                <div class="notification-time">
+                  <i class="far fa-clock"></i>
+                  منذ 5 دقائق
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="notification-item new"
+              onclick="showToast('فتح الفيديو')"
+            >
+              <div class="notification-icon">
+                <i class="fas fa-video"></i>
+              </div>
+              <div class="notification-content">
+                <div class="notification-title">
+                  مترجم اشارة 2
+                  <span class="notification-badge-new">جديد</span>
+                </div>
+                <div class="notification-text">
+                  لقد تم تجهيز طلبك الخاص بالترجمة
+                </div>
+                <div class="notification-time">
+                  <i class="far fa-clock"></i>
+                  منذ 15 دقيقة
+                </div>
+              </div>
+            </div>
+
+            <div class="notification-item" onclick="showToast('فتح الترجمة')">
+              <div class="notification-icon">
+                <i class="fas fa-language"></i>
+              </div>
+              <div class="notification-content">
+                <div class="notification-title">ترجمة فورية</div>
+                <div class="notification-text">تمت ترجمة رسالتك بنجاح</div>
+                <div class="notification-time">
+                  <i class="far fa-clock"></i>
+                  منذ ساعة
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- أيقونة الملف الشخصي -->
+        <button class="header-btn" id="profileBtn">
+          <i class="fas fa-user"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- المحتوى الرئيسي -->
+    <div class="content">
+      <!-- صفحة نتواصل (الرئيسية) -->
+      <div class="page active" id="connectPage">
+        <div class="connect-header">
+          <h1>نتواصل</h1>
+          <p>تواصل بسهولة مع فريق الدعم بلغة الإشارة</p>
+        </div>
+
+        <!-- أيقونات المترجمين -->
+        <div class="mode-icons">
+          <div class="mode-icon-btn active" id="modeSignLanguage">
+            <i class="fas fa-hands"></i>
+            <span>مترجم 1</span>
+          </div>
+          <div class="mode-icon-btn" id="modeTextToVideo">
+            <i class="fas fa-video"></i>
+            <span>مترجم 2</span>
+          </div>
+        </div>
+
+        <!-- حاوية الكاميرا (لمترجم 1) -->
+        <div class="camera-container" id="cameraContainer">
+          <div class="camera-header">
+            <h3><i class="fas fa-camera"></i> كاميرا الترجمة الفورية</h3>
+            <div class="camera-controls">
+              <button
+                class="camera-btn"
+                id="switchCamera"
+                title="تبديل الكاميرا"
+              >
+                <i class="fas fa-sync-alt"></i>
+              </button>
+              <button class="camera-btn" id="capturePhoto" title="التقاط صورة">
+                <i class="fas fa-camera"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="camera-feed" id="cameraFeed">
+            <video
+              id="cameraVideo"
+              autoplay
+              playsinline
+              style="display: none"
+            ></video>
+            <div class="camera-placeholder" id="cameraPlaceholder">
+              <i class="fas fa-video"></i>
+              <p>اضغط على ايقونة مترجم 1 لتشغيل الكاميرا</p>
+            </div>
+          </div>
+
+          <!-- منطقة النص -->
+          <div class="input-area">
+            <div class="text-input-container">
+              <textarea
+                id="textInput"
+                placeholder="اكتب النص هنا... (مثال: 1 مرحبا، 2 كيف حالك، 3 شكرا، 4 مع السلامة)"
+              ></textarea>
+            </div>
+
+            <div class="action-buttons">
+              <button
+                class="action-btn speak-btn"
+                id="speakBtn"
+                title="تحويل النص الى صوت"
+              >
+                <i class="fas fa-volume-up"></i>
+                <span>تكلم</span>
+              </button>
+              <button class="action-btn" id="translateBtn" title="ترجمة فورية">
+                <i class="fas fa-video"></i>
+                <span>تسجيل فيديو</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- حاوية المترجم الثاني مع أيقونة تسجيل محسنة بشكل كبير -->
+        <div
+          class="video-converter-container"
+          id="videoConverterContainer"
+          style="display: none"
+        >
+          <div class="converter-header">
+            <i class="fas fa-video"></i>
+            <span>تحويل النص إلى فيديو بلغة الإشارة</span>
+          </div>
+
+          <div class="converter-text-area">
+            <textarea
+              id="videoTextInput"
+              placeholder="اكتب النص لتحويله إلى فيديو بلغة الاشارة..."
+            ></textarea>
+          </div>
+
+          <div class="converter-controls">
+            <div class="record-control">
+              <!-- أيقونة تسجيل محسنة بشكل كبير -->
+              <button class="premium-record-btn" id="premiumRecordBtn">
+                <i class="fas fa-microphone"></i>
+              </button>
+              <span class="record-status-premium" id="premiumRecordStatus"
+                >جاهز للتسجيل</span
+              >
+            </div>
+
+            <button class="convert-btn" id="convertToVideoBtn">
+              <i class="fas fa-film"></i>
+              تحويل إلى فيديو
+            </button>
+          </div>
+
+          <!-- منطقة معاينة الفيديو -->
+          <div
+            class="video-preview-area"
+            id="videoPreviewArea"
+            style="display: none"
+          >
+            <h4>
+              <i class="fas fa-play-circle" style="color: #8e7ab5"></i> معاينة
+              الفيديو
+            </h4>
+            <div class="video-frame">
+              <video id="previewVideo" controls>
+                <source src="#" type="video/mp4" />
+              </video>
+            </div>
+          </div>
+        </div>
+
+        <!-- توقيع المطور -->
+        <div class="main-developer-credit">
+          <i class="fas fa-code"></i> تم التطوير بواسطة
+          <strong>Genius Ai</strong> <i class="fas fa-crown"></i> © 2026
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal الملف الشخصي -->
+    <div class="modal" id="profileModal">
+      <div class="modal-header">
+        <h3><i class="fas fa-user"></i> الملف الشخصي</h3>
+        <button class="modal-close" id="profileModalClose">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <div class="simple-profile">
+        <div class="profile-field">
+          <label><i class="fas fa-user"></i> الاسم الكامل</label>
+          <input
+            type="text"
+            id="profileName"
+            value="Mostafa Alaa El-Din"
+            readonly
+          />
+        </div>
+
+        <div class="profile-field">
+          <label><i class="fas fa-envelope"></i> البريد الالكتروني</label>
+          <input
+            type="email"
+            id="profileEmail"
+            value="mostafa.alaa@example.com"
+          />
+        </div>
+
+        <a
+          href="https://wa.me/201003380635"
+          target="_blank"
+          class="whatsapp-link"
+        >
+          <i class="fab fa-whatsapp"></i>
+          <span>+20 10 03380635</span>
+          <i class="fas fa-external-link-alt"></i>
+        </a>
+
+        <div class="profile-actions">
+          <button class="profile-btn save" id="profileSave">
+            <i class="fas fa-save"></i> حفظ
+          </button>
+          <button class="profile-btn logout" id="logoutBtn">
+            <i class="fas fa-sign-out-alt"></i> تسجيل الخروج
+          </button>
+        </div>
+
+        <div class="developer-credit">
+          تم التطوير بواسطة <strong>Genius Ai</strong> © 2026
+        </div>
+      </div>
+    </div>
+
+    <!-- رسالة تأكيد -->
+    <div class="toast" id="toast">
+      <i class="fas fa-check-circle"></i>
+      <span id="toastMessage">تم بنجاح</span>
+    </div>
+
+    <script>
+      // بيانات المستخدم الحالي
+      const currentUser = {
+        name: "Mostafa Alaa El-Din",
+        email: "mostafa.alaa@example.com",
+      };
+
+      // متغيرات عام للتطبيق
+      let cameraStream = null;
+      let isCameraOn = false;
+      let currentCamera = "user";
+      let recognition = null;
+      let synthesis = window.speechSynthesis;
+      let mediaRecorder = null;
+      let audioChunks = [];
+      let isRecordingVideo = false;
+
+      // متغيرات جديدة لتسجيل الفيديو للترجمة (Start/Stop)
+      let translationMediaRecorder = null;
+      let translationChunks = [];
+      let isTranslating = false; // لتتبع حالة زر الترجمة
+
+      // الدومين الأساسي لتصحيح الروابط
+      const BASE_API_URL = "https://moroccan-sign.geniusaipro.online";
+
+      // API Endpoints
+      const API_ENDPOINTS = {
+        audioToSign: `${BASE_API_URL}/api/audio-to-sign`,
+        textToSign: `${BASE_API_URL}/api/text-to-sign`,
+        health: "https://recognition.geniusaipro.online/api/health",
+        gestures: "https://recognition.geniusaipro.online/api/gestures",
+        recognize: "https://recognition.geniusaipro.online/api/recognize",
+      };
+
+      // تهيئة التطبيق عند تحميل الصفحة
+      document.addEventListener("DOMContentLoaded", function () {
+        setupEventListeners();
+        updateProfile();
+        initSpeechRecognition();
+        checkAPIHealth();
+
+        document.getElementById("notificationsBadge").textContent = "3";
+
+        const mode1 = document.getElementById("modeSignLanguage");
+        mode1.addEventListener("click", function () {
+          if (!isCameraOn) {
+            startCamera();
+          }
+        });
+      });
+
+      // دالة API عامة
+      async function callAPI(endpoint, method = "GET", data = null) {
+        try {
+          const options = {
+            method: method,
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
+            mode: "cors",
+            credentials: "omit",
+          };
+
+          if (method !== "GET" && data) {
+            options.body = JSON.stringify(data);
+          }
+
+          const response = await fetch(endpoint, options);
+
+          if (!response.ok) {
+            throw new Error(`HTTP Error: ${response.status}`);
+          }
+
+          return await response.json();
+        } catch (error) {
+          console.error("API Error:", error);
+          return { error: error.message };
+        }
+      }
+
+      // التحقق من صحة الخدمات
+      async function checkAPIHealth() {
+        try {
+          const health = await callAPI(API_ENDPOINTS.health, "GET");
+          if (!health.error) {
+            showToast("✅ تم الاتصال بخدمة الترجمة");
+            fetchAvailableGestures();
+          }
+        } catch (error) {
+          console.error("❌ Health Check Error:", error);
+        }
+      }
+
+      // التحويل من نص إلى لغة إشارة (فيديو)
+      async function convertTextToSignVideo(text) {
+        try {
+          showToast("جاري التحويل من النص إلى فيديو...");
+          const response = await callAPI(API_ENDPOINTS.textToSign, "POST", {
+            text: text,
+            language: "ar",
+          });
+
+          if (response.error) {
+            showToast("خطأ في التحويل: " + response.error);
+            return null;
+          }
+
+          if (response.video_url && response.video_url.startsWith("/")) {
+            response.video_url = BASE_API_URL + response.video_url;
+          }
+
+          return response;
+        } catch (error) {
+          showToast("خطأ في الاتصال بالخدمة");
+          return null;
+        }
+      }
+
+      // التحويل من صوت إلى لغة إشارة
+      async function convertAudioToSign(audioBlob) {
+        try {
+          showToast("جاري تحليل الصوت...");
+
+          const formData = new FormData();
+          formData.append("audio", audioBlob, "audio.wav");
+
+          const response = await fetch(API_ENDPOINTS.audioToSign, {
+            method: "POST",
+            body: formData,
+          });
+
+          if (!response.ok) {
+            throw new Error(`HTTP Error: ${response.status}`);
+          }
+
+          const result = await response.json();
+
+          if (result.video_url && result.video_url.startsWith("/")) {
+            result.video_url = BASE_API_URL + result.video_url;
+          }
+
+          showToast("تم تحليل الصوت بنجاح");
+          return result;
+        } catch (error) {
+          showToast("خطأ في معالجة الصوت");
+          console.error("Audio Processing Error:", error);
+          return null;
+        }
+      }
+
+      // التعرف على الإشارات اليدوية من الفيديو (تحديث لعرض النتيجة sentence)
+      async function recognizeGestures(videoBlob) {
+        try {
+          const formData = new FormData();
+          formData.append("video", videoBlob, "video.mp4");
+
+          const response = await fetch(API_ENDPOINTS.recognize, {
+            method: "POST",
+            body: formData,
+          });
+
+          if (!response.ok) {
+            throw new Error(`HTTP Error: ${response.status}`);
+          }
+
+          const result = await response.json();
+          console.log("✅ Recognized Response:", result);
+
+          // استخراج الجملة sentence وعرضها
+          if (result.success && result.sentence) {
+            const textBox = document.getElementById("textInput");
+            if (textBox) {
+              textBox.value = result.sentence; // عرض الجملة المترجمة
+              showToast("تمت الترجمة: " + result.sentence);
+            }
+          } else if (
+            result.recognized_gestures &&
+            result.recognized_gestures.length > 0
+          ) {
+            // حالة احتياطية لو لم ترجع sentence
+            const gestures = Array.isArray(result.recognized_gestures)
+              ? result.recognized_gestures.join(" ")
+              : result.recognized_gestures;
+            document.getElementById("textInput").value = gestures;
+            showToast("تم التعرف على: " + gestures);
+          } else {
+            showToast("لم يتم التعرف على جملة واضحة");
+          }
+
+          return result;
+        } catch (error) {
+          console.error("❌ Gesture Recognition Error:", error);
+          showToast("خطأ في الاتصال بالسيرفر");
+          return null;
+        }
+      }
+
+      // الحصول على قائمة الإشارات المتاحة
+      async function fetchAvailableGestures() {
+        try {
+          await callAPI(API_ENDPOINTS.gestures, "GET");
+        } catch (error) {
+          console.error("Gestures Fetch Error:", error);
+        }
+      }
+
+      function setupEventListeners() {
+        document
+          .getElementById("notificationsBtn")
+          .addEventListener("click", toggleNotifications);
+        document
+          .getElementById("profileBtn")
+          .addEventListener("click", openProfile);
+        document
+          .getElementById("profileModalClose")
+          .addEventListener("click", closeProfile);
+        document
+          .getElementById("profileSave")
+          .addEventListener("click", saveProfile);
+        document.getElementById("logoutBtn").addEventListener("click", logout);
+
+        document
+          .getElementById("modeSignLanguage")
+          .addEventListener("click", switchToMode1);
+        document
+          .getElementById("modeTextToVideo")
+          .addEventListener("click", switchToMode2);
+
+        document
+          .getElementById("switchCamera")
+          .addEventListener("click", switchCamera);
+        document
+          .getElementById("capturePhoto")
+          .addEventListener("click", capturePhoto);
+
+        document
+          .getElementById("speakBtn")
+          .addEventListener("click", speakText);
+
+        // ربط زر الترجمة بالدالة الجديدة التي تدعم (Start/Stop)
+        document
+          .getElementById("translateBtn")
+          .addEventListener("click", handleTranslateButtonClick);
+
+        document
+          .getElementById("premiumRecordBtn")
+          .addEventListener("click", toggleVideoRecording);
+        document
+          .getElementById("convertToVideoBtn")
+          .addEventListener("click", convertToVideo);
+
+        document.addEventListener("click", function (event) {
+          const dropdown = document.getElementById("notificationsDropdown");
+          const btn = document.getElementById("notificationsBtn");
+          if (!btn.contains(event.target) && !dropdown.contains(event.target)) {
+            dropdown.classList.remove("show");
+          }
+        });
+      }
+
+      // دالة التحكم في زر الترجمة (Toggle Logic)
+      function handleTranslateButtonClick() {
+        // التحقق من أننا في وضع الكاميرا
+        if (
+          document
+            .getElementById("modeSignLanguage")
+            .classList.contains("active")
+        ) {
+          if (!isTranslating) {
+            // الحالة 1: البدء في التسجيل
+            startTranslationRecording();
+          } else {
+            // الحالة 2: إيقاف التسجيل وإرسال الفيديو
+            stopTranslationRecording();
+          }
+        } else {
+          // لو كنا في وضع النص (احتياطي)
+          translateTextLegacy();
+        }
+      }
+
+      // دالة بدء تسجيل فيديو للترجمة
+      function startTranslationRecording() {
+        if (!isCameraOn || !cameraStream) {
+          showToast("الرجاء تشغيل الكاميرا أولاً");
+          return;
+        }
+
+        const btn = document.getElementById("translateBtn");
+
+        // تغيير شكل الزر ليدل على أنه يسجل الآن (أحمر مثلاً)
+        btn.innerHTML =
+          '<i class="fas fa-stop-circle" style="color: #ff4444;"></i> <span>إيقاف</span>';
+        btn.style.borderColor = "#ff4444";
+
+        translationChunks = []; // تصفير المصفوفة
+
+        // إعداد المسجل
+        const options = { mimeType: "video/webm;codecs=vp8" };
+        if (!MediaRecorder.isTypeSupported(options.mimeType)) {
+          delete options.mimeType;
+        }
+
+        try {
+          translationMediaRecorder = new MediaRecorder(cameraStream, options);
+
+          translationMediaRecorder.ondataavailable = (e) => {
+            if (e.data.size > 0) {
+              translationChunks.push(e.data);
+            }
+          };
+
+          translationMediaRecorder.start();
+          isTranslating = true;
+          showToast("جاري التسجيل... اضغط مرة أخرى للإيقاف");
+        } catch (e) {
+          console.error("خطأ في بدء التسجيل:", e);
+          showToast("حدث خطأ في التسجيل");
+          resetTranslateButton();
+        }
+      }
+
+      // دالة إيقاف التسجيل ومعالجة الفيديو
+      function stopTranslationRecording() {
+        if (
+          !translationMediaRecorder ||
+          translationMediaRecorder.state === "inactive"
+        )
+          return;
+
+        const btn = document.getElementById("translateBtn");
+        btn.innerHTML =
+          '<i class="fas fa-cog fa-spin"></i> <span>معالجة...</span>';
+        btn.disabled = true;
+        btn.style.borderColor = "#8e7ab5"; // استرجاع اللون الأصلي
+
+        translationMediaRecorder.onstop = async () => {
+          if (translationChunks.length > 0) {
+            const blob = new Blob(translationChunks, { type: "video/mp4" });
+            await recognizeGestures(blob); // إرسال للـ API
+          } else {
+            showToast("لم يتم تسجيل أي بيانات");
+          }
+
+          // إعادة الزر لحالته الطبيعية
+          resetTranslateButton();
+          isTranslating = false;
+        };
+
+        translationMediaRecorder.stop();
+      }
+
+      // إعادة زر الترجمة لحالته الأصلية
+      function resetTranslateButton() {
+        const btn = document.getElementById("translateBtn");
+        btn.innerHTML = '<i class="fas fa-language"></i> <span>ترجمة</span>';
+        btn.disabled = false;
+        btn.style.borderColor = "#8e7ab5";
+      }
+
+      // دوال التسجيل الصوتي (مترجم 2)
+      async function toggleVideoRecording() {
+        if (!isRecordingVideo) {
+          try {
+            const stream = await navigator.mediaDevices.getUserMedia({
+              audio: true,
+            });
+            mediaRecorder = new MediaRecorder(stream);
+            audioChunks = [];
+
+            mediaRecorder.ondataavailable = (event) =>
+              audioChunks.push(event.data);
+
+            mediaRecorder.onstop = async () => {
+              updatePremiumStatus("معالجة الصوت...", true);
+              const audioBlob = new Blob(audioChunks, { type: "audio/wav" });
+              const result = await convertAudioToSign(audioBlob);
+
+              if (result && !result.error) {
+                const extractedText =
+                  result.text ||
+                  result.transcript ||
+                  "مرحبا، أريد الاستفسار عن الترجمة";
+                document.getElementById("videoTextInput").value = extractedText;
+
+                updatePremiumStatus("تم التسجيل ✓", true);
+                showToast("تم تحويل الصوت الى نص بنجاح");
+
+                let videoUrl = result.video_url;
+                if (videoUrl) {
+                  playVideoWithCacheBusting(videoUrl);
+                } else {
+                  convertToVideo();
+                }
+              } else {
+                document.getElementById("videoTextInput").value =
+                  "مرحبا، أريد الاستفسار عن الترجمة";
+                updatePremiumStatus("تم التسجيل (بدون API)", true);
+              }
+
+              setTimeout(() => {
+                updatePremiumStatus("جاهز للتسجيل", false);
+              }, 2000);
+            };
+
+            mediaRecorder.start();
+            isRecordingVideo = true;
+            document
+              .getElementById("premiumRecordBtn")
+              .classList.add("recording");
+            updatePremiumStatus("جاري التسجيل...", true);
+            showToast("بدأ التسجيل الصوتي");
+
+            setTimeout(() => {
+              if (isRecordingVideo) stopVideoRecording();
+            }, 10000); // حد أقصى 10 ثواني للصوت
+          } catch (err) {
+            showToast("خطأ في الوصول الى الميكروفون");
+            updatePremiumStatus("خطأ في الميكروفون", false);
+          }
+        } else {
+          stopVideoRecording();
+        }
+      }
+
+      function stopVideoRecording() {
+        if (mediaRecorder && isRecordingVideo) {
+          mediaRecorder.stop();
+          mediaRecorder.stream.getTracks().forEach((track) => track.stop());
+          isRecordingVideo = false;
+          document
+            .getElementById("premiumRecordBtn")
+            .classList.remove("recording");
+        }
+      }
+
+      function updatePremiumStatus(text, isRecording) {
+        const statusElement = document.getElementById("premiumRecordStatus");
+        statusElement.innerHTML = text;
+        if (isRecording) statusElement.classList.add("recording");
+        else statusElement.classList.remove("recording");
+      }
+
+      // دوال الكاميرا
+      async function startCamera() {
+        try {
+          const constraints = {
+            video: {
+              facingMode: currentCamera,
+              width: { ideal: 1280 },
+              height: { ideal: 720 },
+            },
+            audio: false,
+          };
+          cameraStream = await navigator.mediaDevices.getUserMedia(constraints);
+          const videoElement = document.getElementById("cameraVideo");
+          videoElement.srcObject = cameraStream;
+          videoElement.style.display = "block";
+          document.getElementById("cameraPlaceholder").style.display = "none";
+          isCameraOn = true;
+          showToast("تم تشغيل الكاميرا بنجاح");
+        } catch (err) {
+          if (err.name === "NotAllowedError")
+            showToast("الرجاء السماح بصلاحية الوصول للكاميرا");
+          else if (err.name === "NotFoundError")
+            showToast("لا توجد كاميرا متصلة بجهازك");
+          else showToast("خطأ في تشغيل الكاميرا");
+        }
+      }
+
+      function stopCamera() {
+        if (cameraStream) {
+          cameraStream.getTracks().forEach((track) => track.stop());
+          cameraStream = null;
+        }
+        const videoElement = document.getElementById("cameraVideo");
+        videoElement.style.display = "none";
+        document.getElementById("cameraPlaceholder").style.display = "flex";
+        isCameraOn = false;
+      }
+
+      async function switchCamera() {
+        if (!isCameraOn) {
+          showToast("الرجاء تشغيل الكاميرا أولا");
+          return;
+        }
+        currentCamera = currentCamera === "user" ? "environment" : "user";
+        stopCamera();
+        setTimeout(() => startCamera(), 500);
+      }
+
+      function capturePhoto() {
+        if (!isCameraOn) {
+          showToast("الرجاء تشغيل الكاميرا أولا");
+          return;
+        }
+        const video = document.getElementById("cameraVideo");
+        const canvas = document.createElement("canvas");
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        canvas
+          .getContext("2d")
+          .drawImage(video, 0, 0, canvas.width, canvas.height);
+        const image = canvas.toDataURL("image/png");
+        const link = document.createElement("a");
+        link.download = "sign-language-capture-" + Date.now() + ".png";
+        link.href = image;
+        link.click();
+        showToast("تم التقاط الصورة بنجاح");
+      }
+
+      // دوال التبديل
+      function switchToMode1() {
+        document.getElementById("modeSignLanguage").classList.add("active");
+        document.getElementById("modeTextToVideo").classList.remove("active");
+        document.getElementById("cameraContainer").style.display = "block";
+        document.getElementById("videoConverterContainer").style.display =
+          "none";
+      }
+
+      function switchToMode2() {
+        document.getElementById("modeTextToVideo").classList.add("active");
+        document.getElementById("modeSignLanguage").classList.remove("active");
+        document.getElementById("videoConverterContainer").style.display =
+          "block";
+        document.getElementById("cameraContainer").style.display = "none";
+        if (isCameraOn) stopCamera();
+      }
+
+      // دوال الصوت (Speech to Text)
+      function initSpeechRecognition() {
+        if (
+          "webkitSpeechRecognition" in window ||
+          "SpeechRecognition" in window
+        ) {
+          const SpeechRecognition =
+            window.SpeechRecognition || window.webkitSpeechRecognition;
+          recognition = new SpeechRecognition();
+          recognition.lang = "ar-SA";
+          recognition.continuous = false;
+          recognition.interimResults = false;
+          recognition.onresult = function (event) {
+            document.getElementById("textInput").value =
+              event.results[0][0].transcript;
+            showToast("تم التعرف على الصوت");
+          };
+        }
+      }
+
+      function speakText() {
+        let text = document.getElementById("textInput").value.trim();
+        // تنظيف النص
+        text = text
+          .replace(/^\d+\s*[،,]\s*/g, "")
+          .replace(/\s+\d+\s+/g, " ")
+          .replace(/[،,]+/g, "");
+        if (text === "") {
+          showToast("الرجاء كتابة نص أولا");
+          return;
+        }
+        if (synthesis.speaking) synthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = "ar-SA";
+        utterance.rate = 0.9;
+        synthesis.speak(utterance);
+      }
+
+      // دالة الترجمة القديمة (احتياطي)
+      function translateTextLegacy() {
+        const text = document.getElementById("textInput").value.trim();
+        if (text === "") {
+          showToast("الرجاء كتابة نص للترجمة");
+          return;
+        }
+        showToast("جاري الترجمة الفورية...");
+        convertTextToSignVideo(text).then((response) => {
+          showToast("تمت الترجمة");
+        });
+      }
+
+      function convertToVideo() {
+        const text = document.getElementById("videoTextInput").value.trim();
+        if (text === "") {
+          showToast("الرجاء كتابة نص للتحويل");
+          return;
+        }
+        const convertBtn = document.getElementById("convertToVideoBtn");
+        const originalText = convertBtn.innerHTML;
+        convertBtn.innerHTML =
+          '<span class="loading-spinner"></span> جاري التحويل...';
+        convertBtn.disabled = true;
+
+        convertTextToSignVideo(text)
+          .then((response) => {
+            if (response && !response.error) {
+              let videoUrl =
+                response.video_url ||
+                response.url ||
+                "https://assets.mixkit.co/videos/preview/mixkit-person-making-gestures-92-large.mp4";
+              playVideoWithCacheBusting(videoUrl);
+              showToast("تم انشاء الفيديو بنجاح");
+            } else {
+              showToast("فشل التحويل. يرجى المحاولة لاحقاً");
+            }
+            convertBtn.innerHTML = originalText;
+            convertBtn.disabled = false;
+          })
+          .catch(() => {
+            showToast("خطأ في التحويل");
+            convertBtn.innerHTML = originalText;
+            convertBtn.disabled = false;
+          });
+      }
+
+      // دالة مساعدة لتشغيل الفيديو مع منع الكاش
+      function playVideoWithCacheBusting(url) {
+        if (url.indexOf("?") > -1) url += "&t=" + new Date().getTime();
+        else url += "?t=" + new Date().getTime();
+
+        const previewVideo = document.getElementById("previewVideo");
+        const videoPreview = document.getElementById("videoPreviewArea");
+
+        previewVideo.pause();
+        previewVideo.src = "";
+        previewVideo.src = url;
+        videoPreview.style.display = "block";
+        previewVideo.load();
+        previewVideo.play().catch((e) => console.log("Auto-play prevented"));
+      }
+
+      // دوال التنبيهات والبروفايل
+      function toggleNotifications(event) {
+        event.stopPropagation();
+        document
+          .getElementById("notificationsDropdown")
+          .classList.toggle("show");
+      }
+      function markAllAsRead() {
+        document.getElementById("notificationsBadge").textContent = "0";
+        showToast("تم تحديد الكل كمقروء");
+      }
+      function openProfile() {
+        document.getElementById("profileModal").classList.add("active");
+      }
+      function closeProfile() {
+        document.getElementById("profileModal").classList.remove("active");
+      }
+      function saveProfile() {
+        currentUser.email = document.getElementById("profileEmail").value;
+        showToast("تم حفظ التغييرات");
+        closeProfile();
+      }
+      function logout() {
+        showToast("جاري تسجيل الخروج...");
+        setTimeout(() => window.location.reload(), 1500);
+      }
+      function updateProfile() {
+        document.getElementById("profileName").value = currentUser.name;
+        document.getElementById("profileEmail").value = currentUser.email;
+      }
+      function showToast(msg) {
+        const toast = document.getElementById("toast");
+        document.getElementById("toastMessage").innerHTML = msg;
+        toast.classList.add("show");
+        setTimeout(() => toast.classList.remove("show"), 2000);
+      }
+      window.onclick = function (event) {
+        if (event.target === document.getElementById("profileModal"))
+          closeProfile();
+      };
+    </script>
+  </body>
+</html>
